@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .timer{
+        border: 10px solid black;
+        height: 300px;
+        width: 700px;
+        margin: auto;
+        background-color: pink;
+    }
+    .container{
+        text-align: center;
+        margin-left: 20px;
+    }
+    span{
+        margin-left: 20px;
+        font-size: 30px;
+        margin-top: 50px;
+    }
+    .span{
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+    button{
+        padding: 10px 80px;
+        margin-top: 50px;
+        background-color: aqua;
+        border-radius: 10px;
+        border: none;
+        margin-left: 30px;
+    }
+</style>
+<body>
+<div class="timer">
+    <h1 class="container">Timer</h1>
+    <div>
+        <span class="span">00</span>
+        <span>:</span>
+        <span class="min">00</span>
+        <span>:</span>
+        <span class="sec">00</span>
+        <span>:</span>
+        <span class="millisecounds">00</span>
+    </div>
+    <button onclick="Start()">start</button>
+    <button onclick="Stop()">stop</button>
+    <button onclick="Restart()">restart</button>
+</div>
+</body>
+<script>
+    let hour = document.querySelector(".span");
+    let min = document.querySelector(".min");
+    let sec = document.querySelector(".sec");
+    let millisecounds = document.querySelector(".millisecounds");
+    let ho = 0;
+    let mi = 0;
+    let se = 0;
+    let milli = 0;
+    let timer = false; 
+
+    function Start() {
+        timer = true;
+    }
+
+    function Stop() {
+        timer = false;
+    }
+
+    function Restart() {
+        ho = 0;
+        mi = 0;
+        se = 0;
+        milli = 0;
+        hour.innerHTML = "00";
+        min.innerHTML = "00";
+        sec.innerHTML = "00";
+        millisecounds.innerHTML = "00";
+    }
+
+    setInterval(() => {
+        if (timer) {
+            milli++;
+            if (milli == 60) {
+                se++;
+                sec.innerHTML = (se <= 9) ? `0${se}` : se;
+                milli = 0;
+            }
+            if (se == 60) {
+                mi++;
+                min.innerHTML = (mi < 10) ? `0${mi}` : mi;
+                se = 0;
+            }
+            if (mi == 60) {
+                ho++;
+                hour.innerHTML = (ho < 10) ? `0${ho}` : ho;
+                mi = 0;
+            }
+            millisecounds.innerHTML = (milli < 10) ? `0${milli}` : milli;
+        }
+    }, 10); 
+</script>
+</html>
